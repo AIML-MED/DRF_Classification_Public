@@ -1,5 +1,7 @@
 # DRF_Classification
 
+This code is running under Python 3.8.19. Please create a virtual environment according to the requirements.txt file.
+
 ### 1. Download the Trained Model:
 
 Visit https://universityofadelaide.box.com/s/2ecx8vj06vkh44w7flprtnh9mpm5c4z2 to access the trained model.
