@@ -1,0 +1,21 @@
+_BASE_: "Base-RCNN-FPN.yaml"
+MODEL:
+#  WEIGHTS: "converted_models/resnet50.pkl"
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 50
+### START OF ADDED PARAMETERS
+#    STRIDE_IN_1X1: False
+#  PIXEL_MEAN: [123.675, 116.280, 103.530]
+#  PIXEL_STD: [58.395, 57.120, 57.375]
+# INPUT:
+#  FORMAT: "RGB"
+### END OF ADDED PARAMETERS
+SOLVER:
+  IMS_PER_BATCH: 12
+  STEPS: (3750, 5625)
+  MAX_ITER: 6250
+DATASETS:
+  TRAIN: ("radius_dataset_train", "radius_dataset_ai", "radius_dataset_val")
+  TEST: ("radius_dataset_test", "radius_dataset_ext_test")
