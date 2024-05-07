@@ -4,8 +4,10 @@ import argparse
 from detectron2.config import get_cfg
 from detectron2.engine import DefaultPredictor
 import cv2
+import warnings
 from AnnotateHelper import annoatate_mask_bgr, mask2box
 import numpy as np
+warnings.filterwarnings("ignore")
 
 
 def conf_model(args):
@@ -26,6 +28,7 @@ def conf_model(args):
 def inference(args):
     predictor = conf_model(args)
     info_dict = {'image_id': list(),
+                 # 'view': list(),
                  'cls_pred': list(),
                  'cls_prob': list(),
                  'set': list(),
@@ -150,8 +153,6 @@ def inference(args):
             json.dump(json_dict, f)
         # end
 
-    im_path = os.path.join(args.image_out_path, '{}.jpg'.format(1))
-    cv2.imwrite(im_path, im)
 
 
 def main(args):
@@ -165,13 +166,7 @@ def main(args):
         "2r3c": {'annotation': [0, 255, 255], 'prediction': [255, 0, 255]},
     }
 
-    result_df_path = os.path.join(args.exp_folder, 'result.csv')
-    study_df_path = os.path.join(args.exp_folder, 'study.csv')
-    args.image_out_path = os.path.join(args.exp_folder, 'generated_images')
-
-    os.makedirs(args.image_out_path, exist_ok=True)
-
-    if args.recompute_result or (not os.path.exists(result_df_path)) or (not os.path.exists(study_df_path)):
+    if args.recompute_result:
         inference(args)
 
 
@@ -181,7 +176,6 @@ if __name__ == '__main__':
     parser.add_argument('--exp_folder', type=str, default='./result')
     parser.add_argument('--config_file', type=str, default='configs/faster_rcnn_R_50_FPN_1x.yaml')
     parser.add_argument('--recompute_result', type=bool, default=True)
-    parser.add_argument('--generate_image', type=bool, default=True)
     parser.add_argument('--mask_on', type=bool, default=True)
     parser.add_argument('--test_threshold', type=float, default=0.5)
     parser.add_argument('--image_path', type=str)
