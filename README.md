@@ -17,5 +17,5 @@ To test the model on an image, use the command below:
  python3 test_net.py --image_path 1.jpeg
 ```
 
-You can find the output results in the ./modelling/result/ directory.
+You can find the output results in the `./modelling/result/` directory.
 
