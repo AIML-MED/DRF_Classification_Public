@@ -10,11 +10,12 @@ Download the model and place it in the `./modelling/result/` directory.
 
 ### 2. Model Testing:
 
+Put the test images in the `./modelling` directory.
+
 To test the model on an image, use the command below:
 ```
  python3 test_net.py --image_path 1.jpeg
 ```
-Put the test images in the `./modelling` directory.
 
 You can find the output results in the ./modelling/result/ directory.
 
